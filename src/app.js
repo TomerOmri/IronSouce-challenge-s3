@@ -1,6 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const config = require('./config/config.js');
+require('./models/fileModel');
+
+config.runMongo();
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
 require('./routes')(app);

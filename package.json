@@ -1,0 +1,28 @@
+{
+  "name": "ironsouce-challenge-s3",
+  "version": "1.0.0",
+  "description": "this is IronSouce-challenge-s3 exercise",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TomerOmri/IronSouce-challenge-s3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TomerOmri/IronSouce-challenge-s3/issues"
+  },
+  "homepage": "https://github.com/TomerOmri/IronSouce-challenge-s3#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.20"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "nodemon": "^1.18.10"
+  }
+}
