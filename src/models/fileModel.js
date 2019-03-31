@@ -1,7 +1,12 @@
 var mongoose = require('mongoose');
 
 let File = new mongoose.Schema({
-    fileName: String
+    fileName: String,
+    fileSize: Number,
+    isPrivate: Boolean,
+    ownerId: String,
+    createdAt: { type: Date, default: Date.now },
+    deletedAt: Date
 });
 
 

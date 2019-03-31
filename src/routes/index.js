@@ -9,7 +9,7 @@ module.exports = (app) => {
         res.status(200).send("All good.")
     });
 
-    mainRouter.post('/uploadFile', async (req, res) =>{
+    mainRouter.post('/uploadFile', async (req, res) => {
         const file = new File(req.body);
 
         try {
