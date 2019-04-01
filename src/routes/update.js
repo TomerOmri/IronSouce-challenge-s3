@@ -15,9 +15,9 @@ module.exports = () => {
         try {
             // todo check if file exist
 
-            await mongoDao.updateFilePermission(ownerId, fileName, access_token);
+            const updatedFile = await mongoDao.updateFilePermission(ownerId, fileName, access_token);
 
-            return res.status(200).send("Updates succussfully");
+            return res.status(200).send(`Updated: ${updatedFile}`);
 
         } catch (e) {
             return res.status(500).send("Couldn't update file");

@@ -19,15 +19,19 @@ module.exports = () => {
 
         const publicFile = await mongoDao.findFile(ownerId, fileName);
 
-        if (!publicFile || publicFile.length === 0) {
+        if (publicFile.isPrivate) {
+            return res.status(401).send("Not authorized.");
+        }
+
+        if (!publicFile || publicFile.length === 0 || publicFile.deletedAt) {
             return res.status(404).send('File is not exist');
         }
 
         if (metadata && metadata === 'true') {
-            return res.status(200).send(fileService.getMetadataFromFile());
+            return res.status(200).send(fileService.getMetadataFromFile(publicFile));
         }
 
-        res.status(200).download(path.join(fileService.getUserPath(privateFile.ownerId), privateFile.name));
+        res.status(200).download(path.join(fileService.getUserPath(publicFile.ownerId), publicFile.name));
 
 
     });
@@ -48,7 +52,7 @@ module.exports = () => {
             }
 
             if (metadata && metadata === 'true') {
-                return res.status(200).send(fileService.getMetadataFromFile());
+                return res.status(200).send(fileService.getMetadataFromFile(privateFile));
             }
 
             res.status(200).download(path.join(fileService.getUserPath(privateFile.ownerId), privateFile.name));

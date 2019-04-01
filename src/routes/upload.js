@@ -19,7 +19,7 @@ module.exports = () => {
 
 
         try {
-            const destinationFolder = fileService.createUserFilesDir(ownerId);
+            const destinationFolder = await fileService.createUserFilesDir(ownerId);
             uploadedFiles = await fileService.uploadFiles(files, destinationFolder, ownerId, access_token);
         } catch (e) {
             return res.status(500).send("Something went wrong, please try again");

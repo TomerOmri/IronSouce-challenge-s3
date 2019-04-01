@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const File = mongoose.model('File');
+const randomstring = require('randomstring');
 
 class mongoDao {
 
@@ -31,32 +32,32 @@ class mongoDao {
         return await File.findOne({secretId: fileIdentifier});
     };
 
-    static async findFile (ownerId, fileName) {
+    static async findFile(ownerId, fileName) {
         return await File.findOne({ownerId: ownerId, name: fileName});
     };
 
-
-
     // Update
-    static async updateFilePermission (ownerId, fileName, access_token) {
-        if (access_token) {
-            // If we hold the *right* access_token, the file is private - there is no other way to get it
-            return await File.findOneAndUpdate({ownerId: ownerId, secretId: fileName}, { isPrivate: false });
+    static async updateFilePermission(ownerId, fileName) {
+
+        const fileToUpdate = await File.findOne({ownerId: ownerId, name: fileName});
+        if (!fileToUpdate) {
+            //todo throw err no file to edit
+            return
         }
 
-        const a =  await File.findOneAndUpdate({ownerId: ownerId, name: fileName}, { isPrivate: true });
-        return a;
+        fileToUpdate.isPrivate = !fileToUpdate.isPrivate;
+
+        if (!fileToUpdate.access_token) {
+            fileToUpdate.access_token = randomstring.generate(10);
+        }
+
+        return await fileToUpdate.save();
     }
-
-
 
     // Delete
-    static async deleteFile (ownerId, fileName) {
+    static async deleteFile(ownerId, fileName) {
         return await File.findOneAndUpdate({ownerId: ownerId, name: fileName}, { deletedAt: Date.now() });
     }
-
-
-
 }
 
 
