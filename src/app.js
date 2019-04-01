@@ -1,12 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const fileUpload = require('express-fileupload');
 const config = require('./config/config.js');
-require('./models/fileModel');
+require('./services/database/models/fileModel');
 
 config.runMongo();
+
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(fileUpload());
 
 
 require('./routes')(app);
