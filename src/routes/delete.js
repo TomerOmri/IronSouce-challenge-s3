@@ -1,24 +1,28 @@
 const express = require('express');
 const mongoDao = require('../services/database/mongo.dao');
-
+const fileService = require('../services/fileService');
 
 module.exports = () => {
     let router = express.Router();
 
     router.delete('/', async (req, res) => {
-        const { isPrivate, access_token, fileName } = req.body;
-        let ownerId = "tomer";
+        const { fileName, ownerId, access_token } = req.body;
 
-        // todo check if user has permission to change this file, updateFilePerm already does so?
-        // todo delete from fs
+        // todo check if user has permission to delete this file
 
         try {
-            // await mongoDao.deleteFile(ownerId, fileName, isPrivate);
+            const fileToDelete = mongoDao.findFile(ownerId, fileName);
+            if (!fileToDelete) {
+                return res.status(404).send(`file: ${fileName} - not found.`);
+            }
 
-            return res.status(200).send("Deleted succussfully");
+            await fileService.deleteFile(ownerId, fileName);
+            await mongoDao.deleteFile(ownerId, fileName);
+
+            return res.status(200).send(`${fileName} Deleted successfully`);
 
         } catch (e) {
-            return res.status(500).send("Couldn't update file");
+            return res.status(500).send("Couldn't delete file");
         }
 
     });

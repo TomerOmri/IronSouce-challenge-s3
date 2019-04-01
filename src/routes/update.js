@@ -6,13 +6,16 @@ module.exports = () => {
     let router = express.Router();
 
     router.patch('/', async (req, res) => {
-        const { isPrivate, access_token, fileName } = req.body;
-        let ownerId = "tomer";
+        const { ownerId, fileName, access_token } = req.body;
 
         // todo check if user has permission to change this file, updateFilePerm already does so?
 
+
+
         try {
-            await mongoDao.updateFilePermission(ownerId, fileName, isPrivate);
+            // todo check if file exist
+
+            await mongoDao.updateFilePermission(ownerId, fileName, access_token);
 
             return res.status(200).send("Updates succussfully");
 
