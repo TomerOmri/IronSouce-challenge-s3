@@ -1,37 +1,49 @@
 const fs = require('fs');
 const path = require('path');
+const mongoDao = require('./database/mongo.dao');
+const ErrorCodes = require('./ErrorCodes');
+const mkdirp = require('mkdirp');
 
-exports.uploadFiles = async (files, destinationFolder) => {
+
+exports.uploadFiles = async (files, destinationFolder, access_token) => {
+    if (!Array.isArray(files)) {
+        files = [files];
+    }
 
     const uploadFileList = files.map (async (file) => {
 
-        // TODO send to fs file saver service
-        file.mv(path.resolve(destinationFolder, file.name));
-
+        try {
+            await file.mv(path.resolve(destinationFolder, file.name));
+        } catch (e) {
+            throw new Error(ErrorCodes.CANT_PLACE_FILE);
+        }
 
         try {
-            if (isPrivate && isPrivate === 'true') {
-                if (!access_token) {
-                    return res.status(400).send("Cannot complete private upload, please provide access_token");
-                }
-
+            if (access_token) {
                 return mongoDao.uploadPrivateFile(file, access_token);
-
-                // const status = mongoDao.uploadPrivateFile(file, access_token);
-                // return status;
 
             } else {
                 return mongoDao.uploadPublicFile(file);
 
             }
-
         } catch (e) {
-            console.log(e);
-            res.status(500).send("Cannot upload file");
+            // TODO: remove file if new & DB failed
+            throw new Error(ErrorCodes.DB_ERROR);
         }
+
 
     });
 
-    const uploadedFiles = await Promise.all(uploadFileList);
-    res.status(201).send(uploadedFiles);
-}
+    return await Promise.all(uploadFileList);
+};
+
+exports.createUserFilesDir = (ownerId) => {
+
+    const destinationFolder = path.join(path.resolve(__dirname, '../../'), 'files', ownerId);
+
+    if (!fs.existsSync(destinationFolder)){
+         mkdirp(destinationFolder);
+    }
+
+    return destinationFolder;
+};
