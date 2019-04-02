@@ -10,9 +10,9 @@ const routes = require('./routes');
 config.runMongo();
 
 const app = express();
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(fileUpload());
+
 app.use(authMiddleware);
 app.use('/', routes());
 app.use(errorHandler);

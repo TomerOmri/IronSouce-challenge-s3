@@ -3,7 +3,7 @@ require('../../services/file-metadata/models/fileModel');
 const sinon = require('sinon');
 const sinonTestFactory = require('sinon-test');
 const chai = require('chai');
-const fileService = require('../../services/file-handler/file-service');
+const fileService = require('../../services/file-handler/file-handler');
 const mockData = require('../_mock/mock.data');
 
 const sinonTest = sinonTestFactory(sinon);

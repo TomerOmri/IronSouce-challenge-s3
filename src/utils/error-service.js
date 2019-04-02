@@ -1,7 +1,8 @@
 module.exports = (message, statusCode) => {
   let error = new Error(message);
   error.statusCode = statusCode;
-  return error
+
+  return error;
 };
 
 // module.exports = {
@@ -10,8 +11,4 @@ module.exports = (message, statusCode) => {
 //   ServerError: () => {}
 // }
 
-
 // do method for each error, and send msg examle: throw new MyErrorClass.NotAuthrize("sdfsd");
-
-
-// https://github.com/feathersjs/feathers/blob/master/packages/errors/lib/index.js

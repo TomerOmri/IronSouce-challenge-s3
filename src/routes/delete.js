@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoDao = require('../services/file-metadata/mongo.dao');
-const fileService = require('../services/file-handler/file-service');
+const fileService = require('../services/file-handler/file-handler');
 const errorService = require('../utils/error-service');
 
 module.exports = () => {

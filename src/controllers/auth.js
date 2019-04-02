@@ -41,7 +41,8 @@ class Auth {
     });
   }
 
-  async getUser (userId){
+  // This method will call the user model in the DB and check if user exist
+  async getUser (userId) {
     return mockUserDB[userId];
   }
 
