@@ -9,8 +9,6 @@ module.exports = () => {
   router.delete('/', async (req, res, next) => {
     const { fileName, ownerId } = req.body;
 
-    // todo check if user has permission to delete this file
-
     try {
       const fileToDelete = mongoDao.findFile(ownerId, fileName);
       if (!fileToDelete)

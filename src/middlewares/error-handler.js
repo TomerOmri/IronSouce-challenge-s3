@@ -1,3 +1,3 @@
 module.exports = (error, req, res, next) => {
-    return res.status(error.statusCode).json({ message: error.message });
+  return res.status(error.statusCode).json({ message: error.message });
 };

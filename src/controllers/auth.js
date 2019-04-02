@@ -1,19 +1,31 @@
 const JwtStrategy = require('passport-jwt');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require('passport');
+const config = require('../config/config');
 
 const mockUserDB = {
-  12345: {
+  jk12x9: {
     name: 'tomer',
-    id: 12345,
+    ownerId: 'jk12x9',
+  },
+  k9a6x: {
+    name: 'tomer',
+    ownerId: 'k9a6x',
+  },
+  kao11x: {
+    name: 'elvis',
+    ownerId: 'kao11x',
+  },
+  heyJude: {
+    name: 'beatels',
+    ownerId: 'heyJude',
   },
 };
 
 class Auth {
-
-  initialize(secretJwt) {
+  // todo: constructor?
+  initialize() {
     passport.use('jwt', this.getStrategy());
-    this.secretJwt = secretJwt;
 
     return passport.initialize();
   }
@@ -24,13 +36,13 @@ class Auth {
 
   getStrategy() {
     const params = {
-      secretOrKey: this.secretJwt,
+      secretOrKey: config.secretJwt,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     };
 
     return new JwtStrategy.Strategy(params, async (payload, done) => {
       try {
-        const user = await this.getUser(payload.userId);
+        const user = await this.getUser(payload.ownerId);
 
         if (user === null)
           return done(null, false, { message: 'The user in the token was not found' });
@@ -43,8 +55,8 @@ class Auth {
   }
 
   // This method will call the user model in the DB and check if user exist
-  async getUser (userId) {
-    return mockUserDB[userId];
+  async getUser (ownerId) {
+    return mockUserDB[ownerId];
   }
 
 }

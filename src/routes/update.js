@@ -6,9 +6,8 @@ module.exports = () => {
   let router = express.Router();
 
   router.patch('/', async (req, res, next) => {
-    const { ownerId, fileName } = req.body;
-
-    // todo  User is authenticated, we will search for this file on his files.
+    const { fileName } = req.body;
+    const { ownerId } = req.userData;
 
     try {
       const updatedFile = await mongoDao.updateFilePermission(ownerId, fileName);
@@ -20,6 +19,8 @@ module.exports = () => {
 
       next(errorService('Something went wrong, please try again', 500));
     }
+
+    return null;
   });
 
   return router;

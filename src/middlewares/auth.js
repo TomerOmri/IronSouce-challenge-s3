@@ -1,13 +1,13 @@
 const Auth = require('../controllers/auth');
-let autho = new Auth();
+const config = require('../config/config');
 
 module.exports = (req, res, next) => {
   const { path } = req;
 
-  if (path.includes('upload') || path.includes('download') || path.includes('heartbeat'))// todo: take from config array
+  if (config.publicRoutes.includes(path))
     return next();
 
-  return autho.authenticate((error, user, info) => {
+  return Auth.authenticate((error, user, info) => {
     if (error)
       return next(error);
 

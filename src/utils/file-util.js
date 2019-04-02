@@ -1,15 +1,16 @@
 const path = require('path');
 const mkdirp = require('mkdirp');
-
-exports.getFilePathByOwnerId = ownerId => {
-  return path.join(path.resolve(__dirname, '../../'), 'files', ownerId);
-};
+const fs = require('fs');
 
 exports.createUserFilesDir = ownerId => {
-  const destinationFolder = fileUtil.getFilePathByOwnerId(ownerId);
+  const destinationFolder = getFilePathByOwnerId(ownerId);
 
   if (!fs.existsSync(destinationFolder))
     mkdirp(destinationFolder);
 
   return destinationFolder;
+};
+
+exports.getFilePathByOwnerId = ownerId => {
+  return path.join(path.resolve(__dirname, '../../'), 'files', ownerId);
 };

@@ -11,7 +11,7 @@ module.exports = {
     mongoose.set('debug', true);
   },
 
-  unAuthRoutes: ['download', 'upload'],
+  publicRoutes: ['/download', '/upload', '/heartbeat'],
 
-  secretJwt: process.env.JWT_SECRET || 'qwertyuiopasdfghjklzxcvbnm15839',
+  secretJwt: process.env.JWT_SECRET || 'qwertyuiopasdfghjklzxcvbnm12912',
 };
