@@ -1,7 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
 const mongoDao = require('./database/mongo.dao');
-const ErrorCodes = require('./ErrorCodes');
 const mkdirp = require('mkdirp');
 
 
@@ -16,7 +15,7 @@ exports.uploadFiles = async (files, destinationFolder, ownerId, access_token) =>
             await file.mv(path.resolve(destinationFolder, file.name));
             return mongoDao.uploadFile(file, ownerId, access_token);
         } catch (e) {
-            throw new Error(ErrorCodes.CANT_PLACE_FILE);
+            throw new Error();
         }
     });
 
