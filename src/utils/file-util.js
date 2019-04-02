@@ -1,16 +1,18 @@
 const path = require('path');
 const mkdirp = require('mkdirp');
-const fs = require('fs');
+const fs = require('fs-extra');
 
-exports.createUserFilesDir = ownerId => {
-  const destinationFolder = getFilePathByOwnerId(ownerId);
+module.exports = {
+  createUserFilesDir: async ownerId => {
+    const destinationFolder = path.join(path.resolve(__dirname, '../../'), 'files', ownerId); // todo fix to method
 
-  if (!fs.existsSync(destinationFolder))
-    mkdirp(destinationFolder);
+    if (!fs.existsSync(destinationFolder))
+      await fs.ensureDir(destinationFolder);
 
-  return destinationFolder;
-};
+    return destinationFolder;
+  },
 
-exports.getFilePathByOwnerId = ownerId => {
-  return path.join(path.resolve(__dirname, '../../'), 'files', ownerId);
+  getFilePathByOwnerId: ownerId => {
+    return path.join(path.resolve(__dirname, '../../'), 'files', ownerId);
+  },
 };

@@ -10,12 +10,13 @@ module.exports = () => {
     if (!req.files)
       next(errorService('No files were uploaded', 400));
 
-    const { access_token, ownerId } = req.body;
+    const { access_token } = req.body;
+    const { ownerId } = req.userData;
     const { files } = req.files;
     let uploadedFiles = [];
 
     try {
-      const destinationFolder = fileUtil.createUserFilesDir(ownerId);
+      const destinationFolder = await fileUtil.createUserFilesDir(ownerId);
       uploadedFiles = await fileService.uploadFiles(files, destinationFolder, ownerId, access_token);
     } catch (err) {
       next(errorService('Something went wrong, please try again', 500));

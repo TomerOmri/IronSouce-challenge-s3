@@ -9,17 +9,16 @@ const mockData = require('../_mock/mock.data');
 const sinonTest = sinonTestFactory(sinon);
 const assert = chai.assert;
 
-
 describe('File Service Unit Tests', () => {
-    describe('OS Integration', () => {
-        it('should include user path in writing directory', sinonTest(function() {
-            const pathToDir = fileService.getFilePathByOwnerId('userId');
-            assert.include(pathToDir, 'userId')
-        }));
+  describe('OS Integration', () => {
+    it('should include user path in writing directory', sinonTest(function() {
+      const pathToDir = fileService.getFilePathByOwnerId('userId');
+      assert.include(pathToDir, 'userId');
+    }));
 
-        // it('should get metadata from file', sinonTest(function() {
-        //     const metadata = fileService.getMetadataFromFile(mockData.mockFile);
-        //     assert.equal(metadata, mockData.assertions.metadataFile);
-        // }));
-});
+    // it('should get metadata from file', sinonTest(function() {
+    //     const metadata = fileService.getMetadataFromFile(mockData.mockFile);
+    //     assert.equal(metadata, mockData.assertions.metadataFile);
+    // }));
+  });
 });
