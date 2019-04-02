@@ -1,23 +1,27 @@
 const express = require('express');
-const loginAPI = require('./login');
 const uploadAPI = require('./upload');
 const downloadAPI = require('./download');
 const updateAPI = require('./update');
 const deleteAPI = require('./delete');
 
-module.exports = (app) => {
-    const mainRouter = express.Router();
+const config = require('../config/config');
 
-    mainRouter.use('/login', loginAPI());
-    mainRouter.use('/upload', uploadAPI());
-    mainRouter.use('/download', downloadAPI());
-    mainRouter.use('/update', updateAPI());
-    mainRouter.use('/delete', deleteAPI());
+const Auth = require('../controllers/auth');
+let autho = new Auth();
 
-    mainRouter.get('/heartbeat', async (req, res) => {
-        res.status(200).send("All good.")
-    });
+module.exports = () => {
+  const mainRouter = express.Router();
 
-    app.use('/', mainRouter);
+  mainRouter.use(autho.initialize());
+  mainRouter.use('/upload', uploadAPI());
+  mainRouter.use('/download', downloadAPI());
+  mainRouter.use('/update', updateAPI());
+  mainRouter.use('/delete', deleteAPI());
+
+  mainRouter.get('/heartbeat', async (req, res) => {
+    res.status(200).send('All good.');
+  });
+
+  return mainRouter;
 };
 

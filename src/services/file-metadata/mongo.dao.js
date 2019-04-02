@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const File = mongoose.model('File');
 const randomstring = require('randomstring');
-const errorService = require('../error-service');
-
-
+const errorService = require('../../utils/error-service');
 
 class mongoDao {
 
@@ -31,8 +29,8 @@ class mongoDao {
     }
 
     // Find
-    static async findPrivateFile(fileIdentifier) {
-        return await File.findOne({secretId: fileIdentifier});
+    static async findPrivateFile(fileIdentifier, access_token) {
+        return await File.findOne({secretId: fileIdentifier, access_token: access_token});
     };
 
     static async findFile(ownerId, fileName) {

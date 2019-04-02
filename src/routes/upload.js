@@ -1,6 +1,6 @@
 const express = require('express');
-const fileService = require('../services/file-service');
-const errorService = require('../services/error-service');
+const fileService = require('../services/file-handler/file-service');
+const errorService = require('../utils/error-service');
 
 
 module.exports = () => {

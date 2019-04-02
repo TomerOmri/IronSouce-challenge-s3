@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
-const mongoDao = require('../services/database/mongo.dao');
-const fileService = require('../services/file-service');
-const errorService = require('../services/error-service');
+const mongoDao = require('../services/file-metadata/mongo.dao');
+const fileService = require('../services/file-handler/file-service');
+const errorService = require('../utils/error-service');
 
 module.exports = () => {
     let router = express.Router();
@@ -30,7 +30,7 @@ module.exports = () => {
             return res.status(200).send(fileService.getMetadataFromFile(publicFile));
         }
 
-        res.status(200).download(path.join(fileService.getUserPath(publicFile.ownerId), publicFile.name));
+        res.status(200).download(path.join(fileService.getFilePathByOwnerId(publicFile.ownerId), publicFile.name));
 
 
     });
@@ -40,21 +40,17 @@ module.exports = () => {
         const { fileIdentifier } = req.params;
         const { access_token, metadata } = req.query;
 
-            const privateFile = await mongoDao.findPrivateFile(fileIdentifier);
+            const privateFile = await mongoDao.findPrivateFile(fileIdentifier, access_token);
 
             if (!privateFile || privateFile.length === 0) {
                 next(errorService('File is not exist', 404));
-            }
-
-            if (privateFile.access_token !== access_token) {
-                next(errorService('Not authorized.', 401));
             }
 
             if (metadata && metadata === 'true') {
                 return res.status(200).send(fileService.getMetadataFromFile(privateFile));
             }
 
-            res.status(200).download(path.join(fileService.getUserPath(privateFile.ownerId), privateFile.name));
+            res.status(200).download(path.join(fileService.getFilePathByOwnerId(privateFile.ownerId), privateFile.name));
 
     });
 

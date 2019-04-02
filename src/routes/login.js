@@ -1,5 +1,5 @@
 const express = require('express');
-const fileService = require('../services/file-service');
+const fileService = require('../services/file-handler/file-service');
 
 
 module.exports = () => {

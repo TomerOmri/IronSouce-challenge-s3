@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const path = require('path');
-const mongoDao = require('./database/mongo.dao');
+const mongoDao = require('../file-metadata/mongo.dao');
 const mkdirp = require('mkdirp');
 
 
@@ -9,7 +9,7 @@ exports.uploadFiles = async (files, destinationFolder, ownerId, access_token) =>
         files = [files];
     }
 
-    const uploadFileList = files.map (async (file) => {
+    return Promise.all(files.map (async (file) => {
 
         try {
             await file.mv(path.resolve(destinationFolder, file.name));
@@ -17,16 +17,14 @@ exports.uploadFiles = async (files, destinationFolder, ownerId, access_token) =>
         } catch (e) {
             throw new Error();
         }
-    });
-
-    return await Promise.all(uploadFileList);
+    }));
 };
 
+//TODO: move to utils
 exports.createUserFilesDir = (ownerId) => {
+    const destinationFolder = this.getFilePathByOwnerId(ownerId);
 
-    const destinationFolder = this.getUserPath(ownerId);
-
-    if (!fs.existsSync(destinationFolder)){
+    if (!fs.existsSync(destinationFolder)) {
          mkdirp(destinationFolder);
     }
 
@@ -34,7 +32,7 @@ exports.createUserFilesDir = (ownerId) => {
 };
 
 exports.deleteFile = async (ownerId, fileName) => {
-    const destinationFolder = this.getUserPath(ownerId);
+    const destinationFolder = this.getFilePathByOwnerId(ownerId);
     return await fs.remove(`${destinationFolder}/${fileName}`);
 };
 
@@ -52,6 +50,7 @@ exports.getMetadataFromFile = (file) => {
     return fileMetadata;
 };
 
-exports.getUserPath = (ownerId) => {
+//TODO: move to utils
+exports.getFilePathByOwnerId = (ownerId) => {
     return path.join(path.resolve(__dirname, '../../'), 'files', ownerId);
 };
