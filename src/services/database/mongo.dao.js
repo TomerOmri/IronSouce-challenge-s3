@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const File = mongoose.model('File');
 const randomstring = require('randomstring');
 
+
 class mongoDao {
 
     // Upload
@@ -40,8 +41,8 @@ class mongoDao {
     static async updateFilePermission(ownerId, fileName) {
 
         const fileToUpdate = await File.findOne({ownerId: ownerId, name: fileName});
-        if (!fileToUpdate) {
-            //todo throw err no file to edit
+        if (!fileToUpdate || fileToUpdate.deletedAt) {
+            //todo throw 404 - FILE NOT EXIST
             return
         }
 

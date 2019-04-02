@@ -16,3 +16,5 @@ require('./routes')(app);
 
 const appPort = config.getPort();
 app.listen(appPort, () => { console.log(`S3 is Running on port ${appPort}`); });
+
+module.exports = app;

@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoDao = require('../services/database/mongo.dao');
-const fileService = require('../services/fileService');
+const fileService = require('../services/file-service');
 
 module.exports = () => {
     let router = express.Router();

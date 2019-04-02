@@ -47,7 +47,7 @@ exports.getMetadataFromFile = (file) => {
     };
 
     if (file.deletedAt) {
-        fileMetadata.deletedAt = file.deletedAt
+        fileMetadata.deleted_at = file.deletedAt
     }
 
     return fileMetadata;

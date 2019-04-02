@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoDao = require('../services/database/mongo.dao');
-const fileService = require('../services/fileService');
+const fileService = require('../services/file-service');
 const path = require('path');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
@@ -9,7 +9,7 @@ module.exports = () => {
     let router = express.Router();
 
     router.post('/', async (req, res) => {
-        if (!req.files || Object.keys(req.files).length === 0) {
+        if (!req.files) {
             return res.status(400).send('No files were uploaded');
         }
 
@@ -19,7 +19,7 @@ module.exports = () => {
 
 
         try {
-            const destinationFolder = await fileService.createUserFilesDir(ownerId);
+            const destinationFolder = fileService.createUserFilesDir(ownerId);
             uploadedFiles = await fileService.uploadFiles(files, destinationFolder, ownerId, access_token);
         } catch (e) {
             return res.status(500).send("Something went wrong, please try again");

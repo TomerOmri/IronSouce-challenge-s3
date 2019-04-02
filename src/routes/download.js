@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoDao = require('../services/database/mongo.dao');
-const fileService = require('../services/fileService');
+const fileService = require('../services/file-service');
 
 
 
