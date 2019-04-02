@@ -12,4 +12,6 @@ module.exports = {
   },
 
   unAuthRoutes: ['download', 'upload'],
+
+  secretJwt: process.env.JWT_SECRET || 'qwertyuiopasdfghjklzxcvbnm15839',
 };

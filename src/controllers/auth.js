@@ -1,5 +1,5 @@
-const JwtStrategy = require('passport-jwt'),
-  ExtractJwt = require('passport-jwt').ExtractJwt;
+const JwtStrategy = require('passport-jwt');
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require('passport');
 
 const mockUserDB = {
@@ -11,8 +11,9 @@ const mockUserDB = {
 
 class Auth {
 
-  initialize() {
+  initialize(secretJwt) {
     passport.use('jwt', this.getStrategy());
+    this.secretJwt = secretJwt;
 
     return passport.initialize();
   }
@@ -23,7 +24,7 @@ class Auth {
 
   getStrategy() {
     const params = {
-      secretOrKey: process.env.JWT_SECRET || 'qwertyuiopasdfghjklzxcvbnm15839',
+      secretOrKey: this.secretJwt,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     };
 
@@ -48,4 +49,4 @@ class Auth {
 
 }
 
-module.exports = Auth;
+module.exports = new Auth();

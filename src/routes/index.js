@@ -5,14 +5,12 @@ const updateAPI = require('./update');
 const deleteAPI = require('./delete');
 
 const config = require('../config/config');
-
 const Auth = require('../controllers/auth');
-let autho = new Auth();
 
 module.exports = () => {
   const mainRouter = express.Router();
 
-  mainRouter.use(autho.initialize());
+  mainRouter.use(Auth.initialize(config.secretJwt));
   mainRouter.use('/upload', uploadAPI());
   mainRouter.use('/download', downloadAPI());
   mainRouter.use('/update', updateAPI());
