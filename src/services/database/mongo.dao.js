@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const File = mongoose.model('File');
 const randomstring = require('randomstring');
+const errorService = require('../error-service');
+
 
 
 class mongoDao {
@@ -42,8 +44,7 @@ class mongoDao {
 
         const fileToUpdate = await File.findOne({ownerId: ownerId, name: fileName});
         if (!fileToUpdate || fileToUpdate.deletedAt) {
-            //todo throw 404 - FILE NOT EXIST
-            return
+            throw new errorService('File not found', 404)
         }
 
         fileToUpdate.isPrivate = !fileToUpdate.isPrivate;

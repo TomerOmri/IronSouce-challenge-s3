@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoDao = require('../services/database/mongo.dao');
 const fileService = require('../services/file-service');
+const errorService = require('../services/error-service');
 
 module.exports = () => {
     let router = express.Router();
@@ -13,7 +14,7 @@ module.exports = () => {
         try {
             const fileToDelete = mongoDao.findFile(ownerId, fileName);
             if (!fileToDelete) {
-                return res.status(404).send(`file: ${fileName} - not found.`);
+                next(errorService('file is not exist', 404));
             }
 
             await fileService.deleteFile(ownerId, fileName);
@@ -21,12 +22,11 @@ module.exports = () => {
 
             return res.status(200).send(`${fileName} Deleted successfully`);
 
-        } catch (e) {
-            return res.status(500).send("Couldn't delete file");
+        } catch (err) {
+            next(errorService("Couldn't delete file", 500));
         }
 
     });
-
 
     return router;
 };
