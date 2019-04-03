@@ -8,6 +8,10 @@ $ cd src
 $ npm start
 $ mongod
 ```
+in another teminal run:
+```sh
+$ mongod
+```
 
 #### Run api & unit tests
 ```sh
