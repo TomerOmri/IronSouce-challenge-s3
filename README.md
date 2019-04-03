@@ -26,7 +26,8 @@ $ npm run lint:fix
 
 ## Documentation
 Use the following API to interact with the Object storage.
--   To make changes (upload/delete/update) you will have to login, the login is implemented with JWT tokens, I have created 4 users upfront, sent in private
+-   To make changes (upload/delete/update) you will have to login, the login is implemented with JWT tokens. 
+- I have created 4 users upfront, can be found in  ********users-logins.txt********
 
 
 ## API  
