@@ -1,14 +1,7 @@
 # S3 Object Storage
 This is Object storage (S3) Node app. written in Express, mongoose.
 
-## How to run
-#### Run with Docker
-```sh
-$ docker-compose build
-$ docker-compose up
-```
-
-#### Run localy
+#### Run the app
 ```sh
 $ npm i
 $ cd src
@@ -16,9 +9,19 @@ $ npm start
 $ mongod
 ```
 
-#### Run tests
+#### Run api & unit tests
 ```sh
 $ npm run test
+```
+
+#### Run linter
+```sh
+$ npm run lint
+```
+
+#### Run linter with fix
+```sh
+$ npm run lint:fix
 ```
 
 ## Documentation

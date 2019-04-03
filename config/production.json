@@ -1,8 +1,8 @@
 {
     "dbConfig": {
-        "mongo": "process.env.PORT"
+        "mongo": "mongodb://10.129.12.31/ironSource"
     },
-    "secretJwt": "process.env.SECRET_JWT",
-    "publicRoutes": "process.env.PUBLIC_ROUTES",
-    "port": "process.env.PORT"
+    "secretJwt": "qkjdsf9823uroijskljc980s9dfjlkaasdz",
+    "publicRoutes": ["/download", "/heartbeat"],
+    "port": "8080"
 }
