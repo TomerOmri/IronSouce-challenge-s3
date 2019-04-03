@@ -10,7 +10,6 @@ module.exports = () => {
     const { fileName } = req.body;
     const { ownerId } = req.userData;
 
-
     try {
       const fileToDelete = await mongoDao.findFile(ownerId, fileName);
       if (!fileToDelete)

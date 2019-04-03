@@ -22,11 +22,11 @@ module.exports = () => {
     if (publicFile.isPrivate)
       next(errorService.NotAuthorized('Not authorized.'));
 
-    if (!publicFile || publicFile.length === 0 || publicFile.deletedAt)
-      next(errorService.NotFound('File is not exist'));
-
     if (metadata && metadata === 'true')
       return res.status(200).send(fileService.getMetadataFromFile(publicFile));
+
+    if (!publicFile || publicFile.length === 0 || publicFile.deletedAt)
+      next(errorService.NotFound('File is not exist'));
 
     return res.status(200).download(path.join(fileUtil.getFilePathByOwnerId(publicFile.ownerId), publicFile.name));
   });
