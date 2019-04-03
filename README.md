@@ -16,6 +16,11 @@ $ npm start
 $ mongod
 ```
 
+#### Run tests
+```sh
+$ npm run test
+```
+
 ## Documentation
 Use the following API to interact with the Object storage.
 -   To make changes (upload/delete/update) you will have to login, the login is implemented with JWT tokens, I have created 4 users upfront, sent in private
