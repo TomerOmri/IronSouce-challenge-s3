@@ -14,9 +14,9 @@ module.exports = (req, res, next) => {
 
     if (!user) {
       if (info.name === 'TokenExpiredError')
-        return errorService.NotAuthorized('Your token has expired. Please generate a new one');
+        return res.status(401).json({ message: 'Your token has expired. Please generate a new one' });
 
-      return errorService.NotAuthorized(info.message);
+      return res.status(401).json({ message: info.message });
     }
 
     req.userData = user;

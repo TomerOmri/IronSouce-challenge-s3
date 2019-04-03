@@ -19,7 +19,7 @@ app.use(errorHandler);
 
 const appPort = config.envVariables.port;
 app.listen(appPort, () => {
-  console.log(`S3 is Running on port ${appPort}`);
+  // console.log(`S3 is Running on port ${appPort}`);
 });
 
 module.exports = app;

@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon src/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:production": "NODE_ENV=production node src/app.js",
+    "test": "mocha test/**/*.js",
+    "lint:fix": "./node_modules/.bin/eslint --quiet --fix ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TomerOmri/IronSouce-challenge-s3.git"
   },
-  "author": "",
+  "author": "Tomer Omri",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/TomerOmri/IronSouce-challenge-s3/issues"
