@@ -1,14 +1,21 @@
-module.exports = (message, statusCode) => {
+function errorFactory (message, statusCode) {
   let error = new Error(message);
   error.statusCode = statusCode;
 
   return error;
+}
+
+module.exports = {
+  BadRequest: message => {
+    return errorFactory(message, 400);
+  },
+  NotAuthorized: message => {
+    return errorFactory(message, 401);
+  },
+  NotFound: message => {
+    return errorFactory(message, 404);
+  },
+  GeneralError: message => {
+    return errorFactory(message, 500);
+  },
 };
-
-// module.exports = {
-//   NotAuthorized: (message) => {  },
-//   NotFound: () => {},
-//   ServerError: () => {}
-// }
-
-// do method for each error, and send msg examle: throw new MyErrorClass.NotAuthrize("sdfsd");

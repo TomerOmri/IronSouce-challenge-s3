@@ -15,15 +15,15 @@ module.exports = () => {
     const { fileName, metadata } = req.query;
 
     if (!fileName || !ownerId)
-      next(errorService('Please provide file name', 400));
+      next(errorService.BadRequest('Please provide file name'));
 
     const publicFile = await mongoDao.findFile(ownerId, fileName);
 
     if (publicFile.isPrivate)
-      next(errorService('Not authorized.', 401));
+      next(errorService.NotAuthorized('Not authorized.'));
 
     if (!publicFile || publicFile.length === 0 || publicFile.deletedAt)
-      next(errorService('File is not exist', 404));
+      next(errorService.NotFound('File is not exist'));
 
     if (metadata && metadata === 'true')
       return res.status(200).send(fileService.getMetadataFromFile(publicFile));
@@ -39,7 +39,7 @@ module.exports = () => {
     const privateFile = await mongoDao.findPrivateFile(fileIdentifier, access_token);
 
     if (!privateFile || privateFile.length === 0)
-      next(errorService('File is not exist', 404));
+      next(errorService.NotFound('File is not exist'));
 
     if (metadata && metadata === 'true')
       return res.status(200).send(fileService.getMetadataFromFile(privateFile));

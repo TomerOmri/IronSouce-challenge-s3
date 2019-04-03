@@ -1,17 +1,18 @@
 const mongoose = require('mongoose');
 
-module.exports = {
-  getPort: function() {
-    return process.env.PORT || 8080;
-  },
+let envVariables = {
+  port: process.env.PORT || 8080,
+  publicRoutes: ['/download', '/heartbeat'],
+  secretJwt: process.env.JWT_SECRET || 'qwertyuiopasdfghjklzxcvbnm12912',
+  mongoAddress: process.env.mongo || 'mongodb://127.0.0.1:27017/ironSource',
+};
 
-  runMongo: function() {
-    const mongoDB = 'mongodb://127.0.0.1:27017/ironSource';
+module.exports = {
+  runMongo: () => {
+    const mongoDB = envVariables.mongoAddress;
     mongoose.connect(mongoDB, { useNewUrlParser: true });
     mongoose.set('debug', true);
   },
 
-  publicRoutes: ['/download', '/heartbeat'],
-
-  secretJwt: process.env.JWT_SECRET || 'qwertyuiopasdfghjklzxcvbnm12912',
+  envVariables: envVariables,
 };

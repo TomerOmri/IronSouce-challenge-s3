@@ -17,7 +17,7 @@ module.exports = () => {
       if (err.statusCode)
         next(err);
 
-      next(errorService('Something went wrong, please try again', 500));
+      next(errorService.GeneralError('Something went wrong, please try again'));
     }
 
     return null;

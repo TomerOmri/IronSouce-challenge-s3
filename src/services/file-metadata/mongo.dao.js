@@ -39,7 +39,7 @@ exports.findFile = async (ownerId, fileName) => {
 exports.updateFilePermission = async (ownerId, fileName) => {
   const fileToUpdate = await File.findOne({ ownerId: ownerId, name: fileName });
   if (!fileToUpdate || fileToUpdate.deletedAt)
-    throw new errorService('File not found', 404);
+    throw errorService.NotFound('File not found');
 
   fileToUpdate.isPrivate = !fileToUpdate.isPrivate;
 

@@ -12,14 +12,14 @@ module.exports = () => {
     try {
       const fileToDelete = mongoDao.findFile(ownerId, fileName);
       if (!fileToDelete)
-        next(errorService('file is not exist', 404));
+        next(errorService.NotFound('file is not exist'));
 
       await fileService.deleteFile(ownerId, fileName);
       await mongoDao.deleteFile(ownerId, fileName);
 
       return res.status(200).send(`${fileName} Deleted successfully`);
     } catch (err) {
-      next(errorService('Couldn\'t delete file', 500));
+      next(errorService.GeneralError('Couldn\'t delete file'));
     }
 
     return null;

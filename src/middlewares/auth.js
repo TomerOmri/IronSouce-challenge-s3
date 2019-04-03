@@ -4,7 +4,7 @@ const config = require('../config/config');
 module.exports = (req, res, next) => {
   const { path } = req;
 
-  if (config.publicRoutes.includes(path))
+  if (config.envVariables.publicRoutes.includes(path))
     return next();
 
   return Auth.authenticate((error, user, info) => {

@@ -2,13 +2,16 @@ const express = require('express');
 const fileService = require('../services/file-handler/file-handler');
 const errorService = require('../utils/error-service');
 const fileUtil = require('../utils/file-util');
+const schema = require('../utils/schema-validation');
+const validation = require('../middlewares/validate');
+const Joi = require('joi');
 
 module.exports = () => {
   let router = express.Router();
 
-  router.post('/', async (req, res, next) => {
+  router.post('/', validation(schema), async (req, res, next) => {
     if (!req.files)
-      next(errorService('No files were uploaded', 400));
+      next(errorService.BadRequest('No files were uploaded'));
 
     const { access_token } = req.body;
     const { ownerId } = req.userData;
@@ -19,7 +22,7 @@ module.exports = () => {
       const destinationFolder = await fileUtil.createUserFilesDir(ownerId);
       uploadedFiles = await fileService.uploadFiles(files, destinationFolder, ownerId, access_token);
     } catch (err) {
-      next(errorService('Something went wrong, please try again', 500));
+      next(errorService.GeneralError('Something went wrong, please try again'));
     }
 
     return res.status(201).send(uploadedFiles);

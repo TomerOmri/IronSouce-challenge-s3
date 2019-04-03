@@ -36,7 +36,7 @@ class Auth {
 
   getStrategy() {
     const params = {
-      secretOrKey: config.secretJwt,
+      secretOrKey: config.envVariables.secretJwt,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     };
 

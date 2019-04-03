@@ -17,7 +17,7 @@ app.use(authMiddleware);
 app.use('/', routes());
 app.use(errorHandler);
 
-const appPort = config.getPort();
+const appPort = config.envVariables.port;
 app.listen(appPort, () => {
   console.log(`S3 is Running on port ${appPort}`);
 });
