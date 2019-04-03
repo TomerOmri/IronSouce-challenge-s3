@@ -1,10 +1,10 @@
 const express = require('express');
+const Auth = require('../controllers/auth');
+
 const uploadAPI = require('./upload');
 const downloadAPI = require('./download');
 const updateAPI = require('./update');
 const deleteAPI = require('./delete');
-
-const Auth = require('../controllers/auth');
 
 module.exports = () => {
   const mainRouter = express.Router();
@@ -16,7 +16,11 @@ module.exports = () => {
   mainRouter.use('/delete', deleteAPI());
 
   mainRouter.get('/heartbeat', async (req, res) => {
-    res.status(200).send('All good.');
+    return res.status(200).send('All good.');
+  });
+
+  mainRouter.use( (req, res, next) => {
+    return res.status(404).send('404 - Nothing to see here');
   });
 
   return mainRouter;
