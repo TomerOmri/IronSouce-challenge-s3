@@ -1,5 +1,4 @@
 const path = require('path');
-const mkdirp = require('mkdirp');
 const fs = require('fs-extra');
 
 function getFilePathByOwnerId (ownerId) {
