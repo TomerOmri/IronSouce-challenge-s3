@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
-const config = require('./config/config.js');
+const config = require('../config/config.js');
 const errorHandler = require('./middlewares/error-handler');
 const authMiddleware = require('./middlewares/auth');
 require('./services/file-metadata/models/fileModel');

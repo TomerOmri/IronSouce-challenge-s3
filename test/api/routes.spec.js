@@ -1,7 +1,7 @@
-require('../../services/file-metadata/models/fileModel');
+require('../../src/services/file-metadata/models/fileModel');
 const request = require('supertest');
 
-let app = require('../../app');
+let app = require('../../src/app');
 
 describe('Upload API Tests', () => {
   it('should check heartbeat public api ', () => {

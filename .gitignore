@@ -3,3 +3,4 @@ node_modules/
 files/
 src/.DS_Store
 src/test/.DS_Store
+.DS_Store

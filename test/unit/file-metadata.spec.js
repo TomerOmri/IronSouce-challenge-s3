@@ -1,8 +1,8 @@
-require('../../services/file-metadata/models/fileModel');
+require('../../src/services/file-metadata/models/fileModel');
 const sinon = require('sinon');
 const sinonTestFactory = require('sinon-test');
 const chai = require('chai');
-const mongoDao = require('../../services/file-metadata/mongo.dao');
+const mongoDao = require('../../src/services/file-metadata/mongo.dao');
 const mockData = require('../_mock/mock.data');
 const mongoose = require('mongoose');
 
