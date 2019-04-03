@@ -1,15 +1,6 @@
 const Auth = require('../controllers/auth');
 const config = require('../config/config');
-
-function isPublicRoute (path) {
-  let isPublic = false;
-  config.envVariables.publicRoutes.forEach(  publicRoute =>  {
-    if (path.includes(publicRoute))
-      isPublic = true;
-  } );
-
-  return isPublic;
-}
+const errorService = require('../utils/error-service');
 
 module.exports = (req, res, next) => {
   const { path } = req;
@@ -23,9 +14,9 @@ module.exports = (req, res, next) => {
 
     if (!user) {
       if (info.name === 'TokenExpiredError')
-        return res.status(401).json({ message: 'Your token has expired. Please generate a new one' });
+        return errorService.NotAuthorized('Your token has expired. Please generate a new one');
 
-      return res.status(401).json({ message: info.message });
+      return errorService.NotAuthorized(info.message);
     }
 
     req.userData = user;
@@ -33,3 +24,13 @@ module.exports = (req, res, next) => {
     return next();
   })(req, res, next);
 };
+
+function isPublicRoute (path) {
+  let isPublic = false;
+  config.envVariables.publicRoutes.forEach(  publicRoute =>  {
+    if (path.includes(publicRoute))
+      isPublic = true;
+  } );
+
+  return isPublic;
+}

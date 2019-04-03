@@ -1,4 +1,3 @@
-const config = require('../../config/config');
 require('../../services/file-metadata/models/fileModel');
 const sinon = require('sinon');
 const sinonTestFactory = require('sinon-test');

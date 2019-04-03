@@ -3,27 +3,8 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require('passport');
 const config = require('../config/config');
 
-const mockUserDB = {
-  jk12x9: {
-    name: 'tomer',
-    ownerId: 'jk12x9',
-  },
-  k9a6x: {
-    name: 'tomer',
-    ownerId: 'k9a6x',
-  },
-  kao11x: {
-    name: 'elvis',
-    ownerId: 'kao11x',
-  },
-  heyJude: {
-    name: 'beatels',
-    ownerId: 'heyJude',
-  },
-};
-
 class Auth {
-  // todo: constructor?
+
   initialize() {
     passport.use('jwt', this.getStrategy());
 
@@ -55,10 +36,30 @@ class Auth {
   }
 
   // This method will call the user model in the DB and check if user exist
+  // since there is no sign up-login platform yet, we will validate with mock data
   async getUser (ownerId) {
     return mockUserDB[ownerId];
   }
 
 }
+
+const mockUserDB = {
+  jk12x9: {
+    name: 'tomer',
+    ownerId: 'jk12x9',
+  },
+  k9a6x: {
+    name: 'tomer',
+    ownerId: 'k9a6x',
+  },
+  kao11x: {
+    name: 'elvis',
+    ownerId: 'kao11x',
+  },
+  heyJude: {
+    name: 'beatels',
+    ownerId: 'heyJude',
+  },
+};
 
 module.exports = new Auth();

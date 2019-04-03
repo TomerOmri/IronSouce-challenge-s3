@@ -4,7 +4,7 @@ let envVariables = {
   port: process.env.PORT || 8080,
   publicRoutes: ['/download', '/heartbeat'],
   secretJwt: process.env.JWT_SECRET || 'qwertyuiopasdfghjklzxcvbnm12912',
-  mongoAddress: process.env.mongo || 'mongodb://127.0.0.1:27017/ironSource',
+  mongoAddress: process.env.MONGO || 'mongodb://127.0.0.1:27017/ironSource',
 };
 
 module.exports = {
