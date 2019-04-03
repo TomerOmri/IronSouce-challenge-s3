@@ -1,10 +1,20 @@
 const Auth = require('../controllers/auth');
 const config = require('../config/config');
 
+function isPublicRoute (path) {
+  let isPublic = false;
+  config.envVariables.publicRoutes.forEach(  publicRoute =>  {
+    if (path.includes(publicRoute))
+      isPublic = true;
+  } );
+
+  return isPublic;
+}
+
 module.exports = (req, res, next) => {
   const { path } = req;
 
-  if (config.envVariables.publicRoutes.includes(path))
+  if (isPublicRoute(path))
     return next();
 
   return Auth.authenticate((error, user, info) => {

@@ -7,10 +7,12 @@ module.exports = () => {
   let router = express.Router();
 
   router.delete('/', async (req, res, next) => {
-    const { fileName, ownerId } = req.body;
+    const { fileName } = req.body;
+    const { ownerId } = req.userData;
+
 
     try {
-      const fileToDelete = mongoDao.findFile(ownerId, fileName);
+      const fileToDelete = await mongoDao.findFile(ownerId, fileName);
       if (!fileToDelete)
         next(errorService.NotFound('file is not exist'));
 

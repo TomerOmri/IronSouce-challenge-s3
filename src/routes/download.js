@@ -14,7 +14,7 @@ module.exports = () => {
     const { ownerId } = req.body;
     const { fileName, metadata } = req.query;
 
-    if (!fileName || !ownerId)
+    if (!fileName)
       next(errorService.BadRequest('Please provide file name'));
 
     const publicFile = await mongoDao.findFile(ownerId, fileName);
