@@ -4,13 +4,14 @@ const errorService = require('../utils/error-service');
 const fileUtil = require('../utils/file-util');
 const schema = require('../utils/schema-validation');
 const validation = require('../middlewares/validate');
+const Joi = require('joi');
 
 module.exports = () => {
-  const router = express.Router();
+  let router = express.Router();
 
   router.post('/', validation(schema), async (req, res, next) => {
     if (!req.files)
-      return res.send(errorService.BadRequest('No files were uploaded'));
+      next(errorService.BadRequest('No files were uploaded'));
 
     const { access_token } = req.body;
     const { ownerId } = req.userData;

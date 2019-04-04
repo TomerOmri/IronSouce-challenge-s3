@@ -1,4 +1,5 @@
 const path = require('path');
+const mkdirp = require('mkdirp');
 const fs = require('fs-extra');
 
 function getFilePathByOwnerId (ownerId) {
@@ -7,7 +8,7 @@ function getFilePathByOwnerId (ownerId) {
 
 module.exports = {
   createUserFilesDir: async ownerId => {
-    const destinationFolder = getFilePathByOwnerId(ownerId);
+    const destinationFolder = getFilePathByOwnerId(ownerId); // todo fix to method
 
     if (!fs.existsSync(destinationFolder))
       await fs.ensureDir(destinationFolder);
@@ -15,5 +16,5 @@ module.exports = {
     return destinationFolder;
   },
 
-  getFilePathByOwnerId,
+  getFilePathByOwnerId: getFilePathByOwnerId,
 };

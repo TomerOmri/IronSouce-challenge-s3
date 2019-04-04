@@ -1,8 +1,0 @@
-{
-    "dbConfig": {
-        "mongo": "mongodb://10.129.12.31/ironSource"
-    },
-    "secretJwt": "qkjdsf9823uroijskljc980s9dfjlkaasdz",
-    "publicRoutes": ["/download", "/heartbeat"],
-    "port": "8080"
-}

@@ -1,7 +1,7 @@
 const JwtStrategy = require('passport-jwt');
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require('passport');
-const config = require('config');
+const config = require('../../config/config');
 
 class Auth {
 
@@ -17,7 +17,7 @@ class Auth {
 
   getStrategy() {
     const params = {
-      secretOrKey: config.get('secretJwt'),
+      secretOrKey: config.envVariables.secretJwt,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     };
 

@@ -1,5 +1,6 @@
 const Auth = require('../controllers/auth');
-const config = require('config');
+const config = require('../../config/config');
+const errorService = require('../utils/error-service');
 
 module.exports = (req, res, next) => {
   const { path } = req;
@@ -25,5 +26,11 @@ module.exports = (req, res, next) => {
 };
 
 function isPublicRoute (path) {
-  return Boolean(config.get('publicRoutes').find(p => path.includes(p)));
+  let isPublic = false;
+  config.envVariables.publicRoutes.forEach(  publicRoute =>  {
+    if (path.includes(publicRoute))
+      isPublic = true;
+  } );
+
+  return isPublic;
 }
