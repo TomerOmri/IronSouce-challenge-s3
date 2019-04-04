@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "47bdd525-0230-4442-a8af-07a6b28b25b8",
+		"name": "S3Iron",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NTQyMzM1NjQsImV4cCI6MTU4NTc2OTU2NCwiYXVkIjoid3d3Lmlyb25zb3VyY2UuY29tIiwic3ViIjoidG9tZXJAZXhhbXBsZS5jb20iLCJvd25lcklkIjoiazlhNngiLCJuYW1lIjoiSm9obm55In0.4nRm96nKYqlsWA--_cz-VM5XAVDLc-eBQCrFjXZc4SA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "files",
+							"type": "file",
+							"src": ""
+						},
+						{
+							"key": "ownerId",
+							"value": "111",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/upload",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Private",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NTQyMzM1NjQsImV4cCI6MTU4NTc2OTU2NCwiYXVkIjoid3d3Lmlyb25zb3VyY2UuY29tIiwic3ViIjoidG9tZXJAZXhhbXBsZS5jb20iLCJvd25lcklkIjoiazlhNngiLCJuYW1lIjoiSm9obm55In0.4nRm96nKYqlsWA--_cz-VM5XAVDLc-eBQCrFjXZc4SA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "files",
+							"type": "file",
+							"src": ""
+						},
+						{
+							"key": "ownerId",
+							"value": "111",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/upload",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download Public",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ownerId",
+							"value": "k9a6x",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/download?fileName=ETI.jpg&metadata=true",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"download"
+					],
+					"query": [
+						{
+							"key": "fileName",
+							"value": "ETI.jpg"
+						},
+						{
+							"key": "metadata",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download Private",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "ownerId",
+							"value": "k9a6x",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/download/8bade1e0-56c7-11e9-a056-db07bdf3259f?access_token=111",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"download",
+						"8bade1e0-56c7-11e9-a056-db07bdf3259f"
+					],
+					"query": [
+						{
+							"key": "access_token",
+							"value": "111"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete file",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NTQyMzM1NjQsImV4cCI6MTU4NTc2OTU2NCwiYXVkIjoid3d3Lmlyb25zb3VyY2UuY29tIiwic3ViIjoidG9tZXJAZXhhbXBsZS5jb20iLCJvd25lcklkIjoia2FvMTF4IiwibmFtZSI6ImVsdmlzIn0.zw9MZF0nkzVSGM-qfvNMYhzXN3LeYnO7uO1XE38-870",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fileName",
+							"value": "ETI.jpg",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/delete?=",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"delete"
+					],
+					"query": [
+						{
+							"key": "ownerId",
+							"value": "tomer",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": ""
+						},
+						{
+							"key": "isPrivate",
+							"value": "true",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update File",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE1NTQyMzM1NjQsImV4cCI6MTU4NTc2OTU2NCwiYXVkIjoid3d3Lmlyb25zb3VyY2UuY29tIiwic3ViIjoidG9tZXJAZXhhbXBsZS5jb20iLCJvd25lcklkIjoiamsxMng5IiwibmFtZSI6InRvbWVyIn0.7XqZazzpNDLIRSecLDyfIflQIvdy1Z2YkklAxjhs_MI",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fileName",
+							"value": "pizza.png",
+							"type": "text"
+						},
+						{
+							"key": "access_token",
+							"value": "tomers",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/update?",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"update"
+					],
+					"query": [
+						{
+							"key": "ownerId",
+							"value": "tomer",
+							"disabled": true
+						},
+						{
+							"key": "fileName",
+							"value": "ETI.jpg",
+							"disabled": true
+						},
+						{
+							"key": "isPrivate",
+							"value": "true",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
