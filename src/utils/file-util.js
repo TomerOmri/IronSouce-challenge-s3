@@ -15,5 +15,5 @@ module.exports = {
     return destinationFolder;
   },
 
-  getFilePathByOwnerId: getFilePathByOwnerId,
+  getFilePathByOwnerId,
 };

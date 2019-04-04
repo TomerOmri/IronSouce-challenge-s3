@@ -6,11 +6,11 @@ const schema = require('../utils/schema-validation');
 const validation = require('../middlewares/validate');
 
 module.exports = () => {
-  let router = express.Router();
+  const router = express.Router();
 
   router.post('/', validation(schema), async (req, res, next) => {
     if (!req.files)
-      next(errorService.BadRequest('No files were uploaded'));
+      return res.send(errorService.BadRequest('No files were uploaded'));
 
     const { access_token } = req.body;
     const { ownerId } = req.userData;
