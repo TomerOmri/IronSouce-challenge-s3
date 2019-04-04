@@ -4,7 +4,6 @@ const errorService = require('../utils/error-service');
 const fileUtil = require('../utils/file-util');
 const schema = require('../utils/schema-validation');
 const validation = require('../middlewares/validate');
-const Joi = require('joi');
 
 module.exports = () => {
   let router = express.Router();

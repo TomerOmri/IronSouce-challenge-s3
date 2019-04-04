@@ -1,6 +1,5 @@
 const Auth = require('../controllers/auth');
 const config = require('../../config/config');
-const errorService = require('../utils/error-service');
 
 module.exports = (req, res, next) => {
   const { path } = req;
