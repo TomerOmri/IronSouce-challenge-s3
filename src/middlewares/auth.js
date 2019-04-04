@@ -25,11 +25,5 @@ module.exports = (req, res, next) => {
 };
 
 function isPublicRoute (path) {
-  let isPublic = false;
-  config.envVariables.publicRoutes.forEach(  publicRoute =>  {
-    if (path.includes(publicRoute))
-      isPublic = true;
-  } );
-
-  return isPublic;
+  return Boolean(config.envVariables.publicRoutes.find(p => path.includes(p)));
 }

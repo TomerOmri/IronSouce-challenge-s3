@@ -7,7 +7,7 @@ function getFilePathByOwnerId (ownerId) {
 
 module.exports = {
   createUserFilesDir: async ownerId => {
-    const destinationFolder = getFilePathByOwnerId(ownerId); // todo fix to method
+    const destinationFolder = getFilePathByOwnerId(ownerId);
 
     if (!fs.existsSync(destinationFolder))
       await fs.ensureDir(destinationFolder);
@@ -15,5 +15,5 @@ module.exports = {
     return destinationFolder;
   },
 
-  getFilePathByOwnerId: getFilePathByOwnerId,
+  getFilePathByOwnerId,
 };
