@@ -4,7 +4,6 @@ This is Object storage (S3) Node app. written in Express, mongoose.
 #### Run the app
 ```sh
 $ npm i
-$ cd src
 $ npm start
 ```
 in another teminal run:
